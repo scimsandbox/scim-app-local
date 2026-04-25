@@ -1,0 +1,41 @@
+# Log files
+*.log
+logs/
+
+# IDE & Editor
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+.vscode/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100/
+.Trashes/
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Docker / Env
+docker-compose.override.yml
+.env
+env/
+
+# Temporary files
+/tmp/
+temp/
+*.tmp
+
+# Misc
+*.swp
+*~
+
+# Scripts
+scripts/
