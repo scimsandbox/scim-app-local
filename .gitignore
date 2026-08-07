@@ -26,8 +26,11 @@ Desktop.ini
 # Docker / Env
 docker-compose.override.yml
 .env
-# Real env files stay local; the *.env.example templates are tracked.
-env/*.env
+# Everything under env/ stays local — the real env files hold credentials, and so do the
+# .bak/.local/.orig variants and backup subdirectories that editors and merges leave behind.
+# Only the *.env.example templates are tracked.
+env/*
+!env/*.env.example
 
 # Temporary files
 /tmp/
