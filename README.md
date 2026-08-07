@@ -2,11 +2,15 @@
 
 This repository contains a minimal, Docker Compose–driven local development stack for the SCIM Sandbox.
 
-To rebuild all service dev images from scratch, run the helper script in `scripts/`:
+Compose pulls prebuilt `edipal/*:dev` images, so no build step is needed to run the stack — see [Quick start](#quick-start).
+
+Maintainers rebuilding and republishing those images can use the helper script in `scripts/`:
 
 ```bash
-./scripts/build-dev-images.sh [--no-cache]
+./scripts/build-and-push-dev-images.sh [--no-cache]
 ```
+
+It iterates over the sibling component repositories, so it expects them checked out next to this one, and it pushes to the `edipal` Docker Hub namespace.
 
 ## Quick start
 
