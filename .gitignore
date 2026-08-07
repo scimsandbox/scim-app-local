@@ -26,7 +26,8 @@ Desktop.ini
 # Docker / Env
 docker-compose.override.yml
 .env
-env/
+# Real env files stay local; the *.env.example templates are tracked.
+env/*.env
 
 # Temporary files
 /tmp/
