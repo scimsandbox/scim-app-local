@@ -4,13 +4,13 @@ This repository contains a minimal, Docker Compose–driven local development st
 
 Compose pulls prebuilt `edipal/*:dev` images, so no build step is needed to run the stack — see [Quick start](#quick-start).
 
-Maintainers rebuilding and republishing those images can use the helper script in `scripts/`:
+Maintainers rebuilding those images can use the helper script in `scripts/`:
 
 ```bash
-./scripts/build-and-push-dev-images.sh [--no-cache]
+./scripts/build-and-push-dev-images.sh [--push] [--no-cache]
 ```
 
-It iterates over the sibling component repositories, so it expects them checked out next to this one, and it pushes to the `edipal` Docker Hub namespace.
+It iterates over the sibling component repositories, so it expects them checked out next to this one. By default it builds each image locally for the current host architecture and loads it into Docker; with `--push` it builds multi-architecture images and pushes them to the `edipal` Docker Hub namespace.
 
 ## Quick start
 
@@ -47,11 +47,11 @@ docker compose -f docker-compose-spring.yml down --volumes
 
 ## Default ports
 
-- API: http://localhost:8080
-- Management UI: http://localhost:8081
-- Validator UI: http://localhost:8082
-- Playground PostgreSQL: 5432
-- Validator PostgreSQL: 5433
+- API: http://localhost:18080
+- Management UI: http://localhost:18081
+- Validator UI: http://localhost:18082
+- Playground PostgreSQL: 15432
+- Validator PostgreSQL: 15433
 
 ## Environment files
 
@@ -83,8 +83,8 @@ Each template documents its own variables inline. A missing env file for an acti
 
 Both UIs authenticate through Auth0 and will not start without it. Register **two** Regular Web Applications in your tenant — one per UI, since each has its own callback URL — and add these to their respective *Allowed Callback URLs*:
 
-- Management UI: `http://localhost:8081/login/oauth2/code/auth0`
-- Validator UI: `http://localhost:8082/login/oauth2/code/auth0`
+- Management UI: `http://localhost:18081/login/oauth2/code/auth0`
+- Validator UI: `http://localhost:18082/login/oauth2/code/auth0`
 
 Copy each application's Client ID and Client Secret into the matching env file, and set `AUTH0_ISSUER_URI` to your tenant URL **including the trailing slash**.
 
@@ -110,13 +110,13 @@ This repository does not contain the full service source code. If you need to wo
 
 ## Notes
 
-- Use the management UI (`http://localhost:8081`) to create workspaces and generate bearer tokens.
+- Use the management UI (`http://localhost:18081`) to create workspaces and generate bearer tokens.
 - When calling the SCIM API, include the workspace UUID in the route, for example:
 
 ```bash
 curl -H "Authorization: Bearer ${SCIM_TOKEN}" \
   -H "Accept: application/scim+json" \
-  http://localhost:8080/ws/${WORKSPACE_UUID}/scim/v2/ServiceProviderConfig
+  http://localhost:18080/ws/${WORKSPACE_UUID}/scim/v2/ServiceProviderConfig
 ```
 
 ## Contributing
