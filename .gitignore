@@ -40,3 +40,6 @@ temp/
 # Misc
 *.swp
 *~
+
+# Security scan outputs
+trivy-*.sarif
