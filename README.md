@@ -47,11 +47,13 @@ docker compose -f docker-compose-spring.yml down --volumes
 
 ## Default ports
 
-- API: http://localhost:18080
+All published host ports bind to loopback (`127.0.0.1`) by default (`${LOCAL_BIND_IP:-127.0.0.1}`) so PostgreSQL instances and management endpoints are never exposed on LAN/Wi-Fi interfaces unless `LOCAL_BIND_IP` is explicitly set.
+
+- API: http://localhost:18080 (management/Actuator: `127.0.0.1:19090`)
 - Management UI: http://localhost:18081
 - Validator UI: http://localhost:18082
-- Playground PostgreSQL: 15432
-- Validator PostgreSQL: 15433
+- Playground PostgreSQL: `127.0.0.1:15432`
+- Validator PostgreSQL: `127.0.0.1:15433`
 
 ## Environment files
 
