@@ -18,7 +18,7 @@ services:
     volumes:
       - pgdata-server:/var/lib/postgresql
     ports:
-      - "15432:5432"
+      - "${LOCAL_BIND_IP:-127.0.0.1}:15432:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
       interval: 5s
@@ -33,7 +33,7 @@ services:
     volumes:
       - pgdata-validator:/var/lib/postgresql
     ports:
-      - "15433:5432"
+      - "${LOCAL_BIND_IP:-127.0.0.1}:15433:5432"
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
       interval: 5s
@@ -59,8 +59,8 @@ services:
   scim-server-impl-go:
     image: edipal/scim-server-impl-go:dev
     ports:
-      - "18080:8080"
-      - "19090:9090"
+      - "${LOCAL_BIND_IP:-127.0.0.1}:18080:8080"
+      - "${LOCAL_BIND_IP:-127.0.0.1}:19090:9090"
     env_file:
       - ./env/scim-server-impl-go.env
     environment:
@@ -75,7 +75,7 @@ services:
   scim-server-ui-spring:
     image: edipal/scim-server-ui-spring:dev
     ports:
-      - "18081:8081"
+      - "${LOCAL_BIND_IP:-127.0.0.1}:18081:8081"
     env_file:
       - ./env/scim-server-ui-spring.env
     environment:
@@ -88,7 +88,7 @@ services:
   scim-validator-ui-spring:
     image: edipal/scim-validator-ui-spring:dev
     ports:
-      - "18082:8082"
+      - "${LOCAL_BIND_IP:-127.0.0.1}:18082:8082"
     env_file:
       - ./env/scim-validator-ui-spring.env
     environment:

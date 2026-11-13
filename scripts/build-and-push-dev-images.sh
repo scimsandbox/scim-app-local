@@ -2,8 +2,8 @@
 
 set -euo pipefail
 
-# Get the directory of the current script, then go up one level to the root
-SCRIPT_DIR=$(dirname "$0")
+# Get the directory of the current script, then go up to the workspace root
+SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 ROOT_DIR=$(cd "$SCRIPT_DIR/../.." && pwd)
 PASSTHROUGH_ARGS=()
 PUSH_FLAG=false
@@ -39,10 +39,10 @@ else
     echo "Starting fast local build of dev images (no push)..."
 fi
 
-# Iterate over all subdirectories in the root directory
-for dir in "$ROOT_DIR"/*/; do
+# Iterate over sibling SCIM component directories in the root directory
+for dir in "$ROOT_DIR"/scim-*/; do
     BUILD_SCRIPT="${dir}scripts/build-and-push-dev-image.sh"
-    if [ -f "$BUILD_SCRIPT" ]; then
+    if [[ -f "$BUILD_SCRIPT" ]]; then
         MODULE_NAME=$(basename "$dir")
         echo "============================================================"
         if [[ "$PUSH_FLAG" == true ]]; then
